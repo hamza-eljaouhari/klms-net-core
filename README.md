@@ -246,6 +246,10 @@ public IActionResult GetKeyInfo(string algorithm, string keyId)
 }
 ```
 
+## React Client
+
+Please find a minimal React client on this URL [https://github.com/hamza-eljaouhari/kms-react-gui]
+
 ## Contributing
 
 We welcome contributions to enhance the functionality and capabilities of this API. Please fork the repository and submit pull requests with your improvements.
