@@ -35,7 +35,7 @@ This API includes integrated Swagger documentation to provide an interactive int
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/cryptographical-key-lifecycle-management.git
+   git clone https://github.com/hamza-eljaouhari/klms-net-core.git
    cd cryptographical-key-lifecycle-management
    ```
 
@@ -50,7 +50,7 @@ This API includes integrated Swagger documentation to provide an interactive int
    ```
 
 4. **Access the API**:
-   Open your browser and navigate to `http://localhost:5000/swagger` to access the Swagger UI.
+   Open your browser and navigate to `http://localhost:YOUR_OWN_PORT/swagger` to access the Swagger UI.
 
 ## Usage
 
@@ -256,7 +256,7 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 
 ## Contact
 
-For any questions or support, please open an issue on the repository or contact the maintainer at [your-email@example.com].
+For any questions or support, please open an issue on the repository or contact the maintainer at [hamza.eljaouhari.1995@gmail.com].
 
 ---
 
