@@ -59,61 +59,191 @@ Here is a brief overview of how to use the key lifecycle management functions:
 ### Create a Key
 
 ```csharp
-string CreateKey(string keyType, int keySize);
+[HttpPost("create")]
+public IActionResult CreateKey([FromBody] CreateKeyRequest request)
+{
+    try
+    {
+        var provider = _factory.GetCryptographyProvider(request.Algorithm);
+        var keyId = provider.CreateKey(request.Algorithm, request.KeySize);
+        return Ok(keyId);
+    }
+    catch (Exception ex)
+    {
+        return BadRequest(ex.Message);
+    }
+}
 ```
 
 ### Encrypt Data
 
 ```csharp
-string Encrypt(string data, string objectType);
+[HttpPost("encrypt")]
+public IActionResult Encrypt([FromBody] EncryptRequest request)
+{
+    try
+    {
+        var provider = _factory.GetCryptographyProvider(request.Algorithm);
+        var encryptedData = provider.Encrypt(request.Data, request.KeyId);
+        return Ok(encryptedData);
+    }
+    catch (Exception ex)
+    {
+        return BadRequest(ex.Message);
+    }
+}
 ```
 
 ### Decrypt Data
 
 ```csharp
-string Decrypt(string data, string keyId);
+[HttpPost("decrypt")]
+public IActionResult Decrypt([FromBody] DecryptRequest request)
+{
+    try
+    {
+        var provider = _factory.GetCryptographyProvider(request.Algorithm);
+        var decryptedData = provider.Decrypt(request.Data, request.KeyId);
+        return Ok(decryptedData);
+    }
+    catch (Exception ex)
+    {
+        return BadRequest(ex.Message);
+    }
+}
 ```
 
 ### Activate a Key
 
 ```csharp
-void ActivateKey(string objectId);
+[HttpPost("activate")]
+public IActionResult ActivateKey([FromBody] KeyActionRequest request)
+{
+    try
+    {
+        var provider = _factory.GetCryptographyProvider(request.Algorithm);
+        provider.ActivateKey(request.KeyId);
+        return Ok($"Key {request.KeyId} activated.");
+    }
+    catch (Exception ex)
+    {
+        return BadRequest(ex.Message);
+    }
+}
 ```
 
 ### Deactivate a Key
 
 ```csharp
-void DeactivateKey(string objectId);
+[HttpPost("deactivate")]
+public IActionResult DeactivateKey([FromBody] KeyActionRequest request)
+{
+    try
+    {
+        var provider = _factory.GetCryptographyProvider(request.Algorithm);
+        provider.DeactivateKey(request.KeyId);
+        return Ok($"Key {request.KeyId} deactivated.");
+    }
+    catch (Exception ex)
+    {
+        return BadRequest(ex.Message);
+    }
+}
 ```
 
 ### Destroy a Key
 
 ```csharp
-void DestroyKey(string objectId);
+[HttpPost("destroy")]
+public IActionResult DestroyKey([FromBody] KeyActionRequest request)
+{
+    try
+    {
+        var provider = _factory.GetCryptographyProvider(request.Algorithm);
+        provider.DestroyKey(request.KeyId);
+        return Ok($"Key {request.KeyId} destroyed.");
+    }
+    catch (Exception ex)
+    {
+        return BadRequest(ex.Message);
+    }
+}
 ```
 
 ### Revoke a Key
 
 ```csharp
-void RevokeKey(string objectId);
+[HttpPost("revoke")]
+public IActionResult RevokeKey([FromBody] KeyActionRequest request)
+{
+    try
+    {
+        var provider = _factory.GetCryptographyProvider(request.Algorithm);
+        provider.RevokeKey(request.KeyId);
+        return Ok($"Key {request.KeyId} revoked.");
+    }
+    catch (Exception ex)
+    {
+        return BadRequest(ex.Message);
+    }
+}
 ```
 
 ### Archive a Key
 
 ```csharp
-void ArchiveKey(string objectId);
+[HttpPost("archive")]
+public IActionResult ArchiveKey([FromBody] KeyActionRequest request)
+{
+    try
+    {
+        var provider = _factory.GetCryptographyProvider(request.Algorithm);
+        provider.ArchiveKey(request.KeyId);
+        return Ok($"Key {request.KeyId} archived.");
+    }
+    catch (Exception ex)
+    {
+        return BadRequest(ex.Message);
+    }
+}
 ```
 
 ### Recover a Key
 
 ```csharp
-void RecoverKey(string objectId);
+[HttpPost("recover")]
+public IActionResult RecoverKey([FromBody] KeyActionRequest request)
+{
+    try
+    {
+        var provider = _factory.GetCryptographyProvider(request.Algorithm);
+        provider.RecoverKey(request.KeyId);
+        return Ok($"Key {request.KeyId} recovered.");
+    }
+    catch (Exception ex)
+    {
+        return BadRequest(ex.Message);
+    }
+}
 ```
 
 ### Get Key Information
 
 ```csharp
-byte[] GetKeyInfo(string objectId);
+[HttpGet("info")]
+public IActionResult GetKeyInfo(string algorithm, string keyId)
+{
+    try
+    {
+        var provider = _factory.GetCryptographyProvider(algorithm);
+        var keyInfo = provider.GetKeyInfo(keyId);
+        return Ok(keyInfo);
+    }
+    catch (Exception ex)
+    {
+        return BadRequest(ex.Message);
+    }
+}
 ```
 
 ## Contributing
